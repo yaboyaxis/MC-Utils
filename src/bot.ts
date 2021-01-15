@@ -7,3 +7,4 @@ const owners: string[] = config.bot.owners;
 const client = new BotClient({ token, owners });
 
 client.start();
+// dank is gay

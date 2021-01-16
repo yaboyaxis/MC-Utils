@@ -39,11 +39,9 @@ export default class Whois extends Command {
       userId: member.id,
     });
     if (
-      !sanctionsData ??
-      !sanctionsData.sanctions ??
-      sanctionsData.sanctions.length < 1 ??
-      sanctionsData.sanctions === null ??
-      sanctionsData.sanctions === undefined
+      !sanctionsData ||
+      !sanctionsData.sanctions ||
+      sanctionsData.sanctions.length < 1
     )
       warns = "No Infractions";
     warns = sanctionsData.sanctions.length.toString();

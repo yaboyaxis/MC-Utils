@@ -32,19 +32,6 @@ export default class Whois extends Command {
     { member }: { member: GuildMember }
   ): Promise<Message> {
     const roles = member.roles.cache.map((r) => r).join(", ") || "None";
-    let warns = "";
-    const sanctionsModel = getModelForClass(MemberModel);
-    const sanctionsData = await sanctionsModel.findOne({
-      guildId: message.guild.id,
-      userId: member.id,
-    });
-    if (
-      !sanctionsData ||
-      !sanctionsData.sanctions ||
-      sanctionsData.sanctions.length < 1
-    )
-      warns = "No Infractions";
-    warns = sanctionsData.sanctions.length.toString();
     return message.util.send(
       new MessageEmbed()
         .setAuthor(
@@ -66,7 +53,6 @@ export default class Whois extends Command {
           utc(member.joinedAt).format("MMMM Do YYYY, h:mm:ss a") + " (UTC)",
           false
         )
-        .addField("Infraction Count", warns ?? "No Infractions", false)
         .addField("User ID", member.user.id, true)
         .addField("Roles", roles, false)
     );

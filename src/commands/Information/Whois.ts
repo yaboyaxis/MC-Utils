@@ -1,8 +1,6 @@
 import { Command } from "discord-akairo";
 import { Message, GuildMember, MessageEmbed } from "discord.js";
 import { utc } from "moment";
-import { getModelForClass } from "@typegoose/typegoose";
-import MemberModel from "../../models/MemberModel";
 
 export default class Whois extends Command {
   public constructor() {

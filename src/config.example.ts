@@ -36,5 +36,5 @@ export default {
     "You are allowed to swear, but please keep in mind that you can't be toxic.",
     "No advertising, in any chats or DMs.",
     "Please speak English only.",
-  ]
+  ],
 };

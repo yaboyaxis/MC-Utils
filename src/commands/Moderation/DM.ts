@@ -111,14 +111,10 @@ export default class Warn extends Command {
               upsert: true,
             }
           )
-          .catch((e) => {
-            embed.setColor(0xff0000);
-            embed.setDescription(`Error Logging Warn to DB: ${e}`);
-            return message.util.send(embed);
-          });
       } catch (e) {
-        Logger.error("DB", e);
-        return;
+        embed.setColor(0xff0000);
+        embed.setDescription(`Error logging DM warn to DB: **${e.message}**`);
+        return message.util.send(embed);
       }
 
       embed.setDescription(

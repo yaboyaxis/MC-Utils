@@ -216,13 +216,10 @@ export default class Mute extends Command {
             upsert: true,
           }
         )
-        .catch((e) => {
-          embed.setColor(0xff0000);
-          embed.setDescription(`Error Logging Mute to DB: ${e}`);
-          return message.util.send(embed);
-        });
     } catch (e) {
-      Logger.error("DB", e);
+      embed.setColor(0xff0000);
+      embed.setDescription(`Error logging mute to DB: ${e}`);
+      return message.util.send(embed);
     }
 
     await message.delete();

@@ -140,9 +140,10 @@ export default class Unmute extends Command {
             upsert: true,
           }
         )
-        .catch((e) => message.channel.send(`Error Logging Mute to DB: ${e}`));
     } catch (e) {
-      Logger.error("DB", e);
+      embed.setColor(0xff0000);
+      embed.setDescription(`Couldn't log unmute to DB: **${e.message}**`);
+      return message.util.send(embed);
     }
 
     embed.setDescription(`Unmuted **${user.user.tag}** | \`${caseNum}\``);

@@ -84,13 +84,10 @@ export default class Unban extends Command {
             upsert: true,
           }
         )
-        .catch((e) => {
-          embed.setColor(0xff0000);
-          embed.setDescription(`Error Logging Kick to DB: ${e}`);
-          return message.util.send(embed);
-        });
     } catch (e) {
-      Logger.error("DB", e);
+      embed.setColor(0xff0000);
+      embed.setDescription(`Error logging unban to DB: **${e.message}**`);
+      return message.util.send(embed);
     }
     try {
       await message.guild.fetchBan(user);

@@ -126,13 +126,10 @@ export default class ForceBan extends Command {
             upsert: true,
           }
         )
-        .catch((e) => {
-          embed.setColor(0xff0000);
-          embed.setDescription(`Error Logging Kick to DB: ${e}`);
-          return message.util.send(embed);
-        });
     } catch (e) {
-      Logger.error("DB", e);
+      embed.setColor(0xff0000);
+      embed.setDescription(`Error logging force ban to DB: **${e.message}**`);
+      return message.util.send(embed);
     }
 
     embed.setDescription(`Banned **${user.tag}** | \`${caseNum}\``);

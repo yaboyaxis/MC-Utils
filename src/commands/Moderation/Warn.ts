@@ -123,12 +123,10 @@ export default class Warn extends Command {
             upsert: true,
           }
         )
-        .catch((e) => {
-          embed.setColor(0xff0000);
-          embed.setDescription(`Error Logging Warn to DB: ${e}`);
-        });
     } catch (e) {
-      Logger.error("DB", e);
+      embed.setColor(0xff0000);
+      embed.setDescription(`Error logging warn to DB: **${e.message}**`);
+      return message.util.send(embed);
     }
 
     embed.setDescription(`Warned **${member.user.tag}** | \`${caseNum}\``);

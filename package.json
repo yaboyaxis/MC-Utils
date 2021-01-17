@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "fullbuild": "npm i && npm run compile",
-    "compile": "npx tsc",
-    "start": "node dist/src/bot.js",
+    "compile": "swc src -d dist",
+    "start": "node dist/bot.js",
     "start:dev": "nodemon src/bot.ts",
     "pretty": "npx prettier --write \"./src/**/*.ts\"",
     "pretty-check": "npx prettier --check \"./src/**/*.ts\""
@@ -33,6 +33,8 @@
     "url-regex-safe": "^1.0.2"
   },
   "devDependencies": {
+    "@swc/cli": "^0.1.27",
+    "@swc/core": "^1.2.45",
     "@types/common-tags": "^1.8.0",
     "@types/mongoose": "^5.7.36",
     "@types/ms": "^0.7.31",

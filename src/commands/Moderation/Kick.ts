@@ -108,7 +108,9 @@ export default class Kick extends Command {
       await member.kick(reason);
     } catch (e) {
       embed.setColor(0xff0000);
-      embed.setDescription(`An error occurred whilst kicking: **${e.message}**`);
+      embed.setDescription(
+        `An error occurred whilst kicking: **${e.message}**`
+      );
       return message.util.send(embed);
     }
 
@@ -129,26 +131,27 @@ export default class Kick extends Command {
 
     const sanctionsModel = getModelForClass(memberModel);
     try {
-      await sanctionsModel
-        .findOneAndUpdate(
-          {
-            guildId: guildID,
-            userId: userId,
+      await sanctionsModel.findOneAndUpdate(
+        {
+          guildId: guildID,
+          userId: userId,
+        },
+        {
+          guildId: guildID,
+          userId: userId,
+          $push: {
+            sanctions: caseInfo,
           },
-          {
-            guildId: guildID,
-            userId: userId,
-            $push: {
-              sanctions: caseInfo,
-            },
-          },
-          {
-            upsert: true,
-          }
-        )
+        },
+        {
+          upsert: true,
+        }
+      );
     } catch (e) {
       embed.setColor(0xff0000);
-      embed.setDescription(`An error occurred whilst logging to DB: **${e.message}**`);
+      embed.setDescription(
+        `An error occurred whilst logging to DB: **${e.message}**`
+      );
       return message.util.send(embed);
     }
 
@@ -163,10 +166,7 @@ export default class Kick extends Command {
       .setFooter(`ID: ${member.id} | ${dateString}`)
       .setColor("RED");
 
-    let modlogChannel = findChannel(
-      this.client,
-      config.channels.modLogChannel
-    );
+    let modlogChannel = findChannel(this.client, config.channels.modLogChannel);
     await modLog(modlogChannel, logEmbed, message.guild.iconURL());
   }
 }

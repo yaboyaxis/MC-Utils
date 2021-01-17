@@ -196,26 +196,25 @@ export default class Mute extends Command {
     }
 
     try {
-      await sanctionsModel
-        .findOneAndUpdate(
-          {
-            guildId: guildID,
-            userId: userId,
+      await sanctionsModel.findOneAndUpdate(
+        {
+          guildId: guildID,
+          userId: userId,
+        },
+        {
+          guildId: guildID,
+          userId: userId,
+          $push: {
+            sanctions: caseInfo,
           },
-          {
-            guildId: guildID,
-            userId: userId,
-            $push: {
-              sanctions: caseInfo,
-            },
-            $set: {
-              mute: muteInformation,
-            },
+          $set: {
+            mute: muteInformation,
           },
-          {
-            upsert: true,
-          }
-        )
+        },
+        {
+          upsert: true,
+        }
+      );
     } catch (e) {
       embed.setColor(0xff0000);
       embed.setDescription(`Error logging mute to DB: ${e}`);

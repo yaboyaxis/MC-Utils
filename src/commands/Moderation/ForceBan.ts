@@ -88,7 +88,9 @@ export default class ForceBan extends Command {
       await message.guild.members.ban(user, { reason: reason });
     } catch (e) {
       embed.setColor(0xff0000);
-      embed.setDescription(`An error occurred whilst banning: **${e.message}**`);
+      embed.setDescription(
+        `An error occurred whilst banning: **${e.message}**`
+      );
       return message.util.send(embed);
     }
 
@@ -109,23 +111,22 @@ export default class ForceBan extends Command {
 
     const sanctionsModel = getModelForClass(memberModel);
     try {
-      await sanctionsModel
-        .findOneAndUpdate(
-          {
-            guildId: guildID,
-            userId: userId,
+      await sanctionsModel.findOneAndUpdate(
+        {
+          guildId: guildID,
+          userId: userId,
+        },
+        {
+          guildId: guildID,
+          userId: userId,
+          $push: {
+            sanctions: caseInfo,
           },
-          {
-            guildId: guildID,
-            userId: userId,
-            $push: {
-              sanctions: caseInfo,
-            },
-          },
-          {
-            upsert: true,
-          }
-        )
+        },
+        {
+          upsert: true,
+        }
+      );
     } catch (e) {
       embed.setColor(0xff0000);
       embed.setDescription(`Error logging force ban to DB: **${e.message}**`);
@@ -143,10 +144,7 @@ export default class ForceBan extends Command {
       .setFooter(`ID: ${user.id} | ${dateString}`)
       .setColor("RED");
 
-    let modlogChannel = findChannel(
-      this.client,
-      config.channels.modLogChannel
-    );
+    let modlogChannel = findChannel(this.client, config.channels.modLogChannel);
     modLog(modlogChannel, logEmbed, message.guild.iconURL());
   }
 }

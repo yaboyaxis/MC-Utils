@@ -57,7 +57,7 @@ export default class MStrike extends Command {
       return;
     const embed = new MessageEmbed().setColor(0x00ff0c);
 
-    let caseNum = uniqid();
+    let caseNum = uniqid("MS-");
     let dateString = utc().format("MMMM Do YYYY, h:mm:ss a");
 
     const caseInfo: CaseInfo = {

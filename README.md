@@ -19,4 +19,4 @@ Discord User: {just for organization}
 
 ### License
 
-This repository is currently in an unlicensed state, which means the code is **source available**, not open source; meaning you **cannot** fork this and make your own bot with it. If you're forking for development, that's ok.
+This repository is currently in an unlicensed state, which means the code is **source available**, not open source; meaning you **cannot** fork this and make your own bot with it. If you're forking for development **to this repo**, that's ok.

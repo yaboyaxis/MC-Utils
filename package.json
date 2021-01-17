@@ -1,6 +1,6 @@
 {
   "name": "mcutils",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "SoundsMC Utils Mod Bot",
   "main": "dist/src/bot.js",
   "scripts": {

@@ -17,7 +17,6 @@ export default class MStrikeInfractions extends Command {
         examples: [
           "minfractions @Axis#0001",
           "m_infractions 379420154955825153",
-          "infractions 379420154955825153",
         ],
       },
       ratelimit: 3,

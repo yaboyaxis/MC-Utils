@@ -19,31 +19,31 @@ export default class Logger {
 
   static success(title: string, body: string) {
     console.log(
-      chalk.bold.green(`[ ${this._getCurrentTime()} ] [ ${title} ] `) + body
+      chalk.green(`[ ${this._getCurrentTime()} ] [ ${title} ] `) + body
     );
   }
 
   static warning(title: string, body: string) {
     console.log(
-      chalk.bold.yellow(`[ ${this._getCurrentTime()} ] [ ${title} ] `) + body
+      chalk.magenta(`[ ${this._getCurrentTime()} ] [ ${title} ] `) + body
     );
   }
 
   static error(title: string, body: string) {
     console.log(
-      chalk.bold.red(`[ ${this._getCurrentTime()} ] [ ${title} ] `) + body
+      chalk.red(`[ ${this._getCurrentTime()} ] [ ${title} ] `) + body
     );
   }
 
   static debug(title: string, body: string) {
     console.log(
-      chalk.bold.magenta(`[ ${this._getCurrentTime()} ] [ ${title} ] `) + body
+      chalk.magenta(`[ ${this._getCurrentTime()} ] [ ${title} ] `) + body
     );
   }
 
   static event(body: string) {
     console.log(
-      chalk.bold.yellow(`[ ${this._getCurrentTime()} ] [ EVENT ] `) + body
+      chalk.cyanBright(`[ ${this._getCurrentTime()} ] [ EVENT ] `) + body
     );
   }
 }

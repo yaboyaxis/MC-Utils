@@ -2,7 +2,7 @@
   "name": "mcutils",
   "version": "2.0.0",
   "description": "SoundsMC Utils Mod Bot",
-  "main": "dist/bot.js",
+  "main": "dist/src/bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "fullbuild": "npm i && npm run compile",
@@ -25,7 +25,7 @@
     "erlpack": "github:discord/erlpack",
     "mathjs": "^8.1.0",
     "moment": "^2.29.1",
-    "mongoose": "^5.10.8",
+    "mongoose": "=5.10.8",
     "mquery": "^3.2.3",
     "ms": "^2.1.2",
     "reflect-metadata": "^0.1.13",

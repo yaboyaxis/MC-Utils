@@ -23,7 +23,8 @@ export default class Blacklist extends Command {
           prompt: {
             start: (msg: Message) =>
               `${msg.author}, please provide a member....`,
-            retry: (msg: Message) => `${msg.author}, please provide a valid member...`,
+            retry: (msg: Message) =>
+              `${msg.author}, please provide a valid member...`,
           },
         },
       ],
@@ -35,26 +36,32 @@ export default class Blacklist extends Command {
     { member }: { member: GuildMember }
   ): Promise<Message> {
     const embed = new MessageEmbed().setColor(0x1abc9c);
-   if (member.id === message.guild.ownerID) {
-    embed.setColor(0xff0000);
-    embed.setDescription(`Member ID is Guild Owner`);
-    return message.util.send(embed);
-   }
-   const memberModel = getModelForClass(MemberModel);
-   try {
-    await memberModel.findOneAndUpdate({
-        guildId: message.guild.id,
-        userId: member.id,
-    }, {
-        userId: member.id,
-        blacklisted: true
-    }, { upsert: true });
-   } catch (e) {
-    embed.setColor(0xff0000);
-    embed.setDescription(`Couldn't blacklist user in DB: **${e.message}**`);
-    return message.util.send(embed);
-   }
-   embed.setDescription(`Blacklisted user successfully | **${member.user.tag}**`);
-   return message.channel.send(embed);
+    if (member.id === message.guild.ownerID) {
+      embed.setColor(0xff0000);
+      embed.setDescription(`Member ID is Guild Owner`);
+      return message.util.send(embed);
+    }
+    const memberModel = getModelForClass(MemberModel);
+    try {
+      await memberModel.findOneAndUpdate(
+        {
+          guildId: message.guild.id,
+          userId: member.id,
+        },
+        {
+          userId: member.id,
+          blacklisted: true,
+        },
+        { upsert: true }
+      );
+    } catch (e) {
+      embed.setColor(0xff0000);
+      embed.setDescription(`Couldn't blacklist user in DB: **${e.message}**`);
+      return message.util.send(embed);
+    }
+    embed.setDescription(
+      `Blacklisted user successfully | **${member.user.tag}**`
+    );
+    return message.channel.send(embed);
   }
 }

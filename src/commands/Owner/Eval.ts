@@ -63,12 +63,12 @@ export default class Eval extends Command {
 
     if (output.length > 1024) {
       const link = await bin(output.replace(evalRegex, "REDACTED"));
-        return message.util.send(
-          new MessageEmbed()
-            .setTitle(`Time Taken: **${stopTime - startTime}** milliseconds`)
-            .setDescription(`Output: **${link}**`)
-            .setColor(result instanceof Error ? 0xff0000 : 0xff00)
-        );
+      return message.util.send(
+        new MessageEmbed()
+          .setTitle(`Time Taken: **${stopTime - startTime}** milliseconds`)
+          .setDescription(`Output: **${link}**`)
+          .setColor(result instanceof Error ? 0xff0000 : 0xff00)
+      );
     }
 
     return message.util.send(

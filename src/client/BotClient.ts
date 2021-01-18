@@ -1,5 +1,10 @@
 import { DocumentType } from "@typegoose/typegoose";
-import { AkairoClient, CommandHandler, ListenerHandler, InhibitorHandler } from "discord-akairo";
+import {
+  AkairoClient,
+  CommandHandler,
+  ListenerHandler,
+  InhibitorHandler,
+} from "discord-akairo";
 import { Message, Collection } from "discord.js";
 import { join } from "path";
 import config from "../config";

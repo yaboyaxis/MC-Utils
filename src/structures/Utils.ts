@@ -15,7 +15,7 @@ import { getModelForClass } from "@typegoose/typegoose";
 import { utc } from "moment";
 import Logger from "./Logger";
 import uniqid from "uniqid";
-import req from '@helperdiscord/centra';
+import req from "@helperdiscord/centra";
 
 export function makeid(length: number) {
   let result = "";
@@ -296,12 +296,12 @@ export function asyncMap<T, R>(
   return Promise.all(arr.map((item) => fn(item)));
 }
 
-export async function bin(data: any, ext: string = 'js') {
-  const res = await req('https://hst.sh/documents', 'POST')
+export async function bin(data: any, ext: string = "js") {
+  const res = await req("https://hst.sh/documents", "POST")
     .body(data)
     .timeout(15000)
     .send();
-  
+
   if (res.statusCode === 200) {
     return `https://hst.sh/${res.json().key}.${ext}`;
   }

@@ -19,41 +19,38 @@ export default class MCStatus extends Command {
 
   public async exec(message: Message): Promise<void> {
     const embed = new MessageEmbed();
-    const res = await req('https://mc-api.net/v3/server/ping/play.soundmc.world', 'GET')
-      .header('content_type', 'application/json')
+    const res = await req(
+      "https://mc-api.net/v3/server/ping/play.soundmc.world",
+      "GET"
+    )
+      .header("content_type", "application/json")
       .send();
-    
+
     if (res.statusCode !== 200) {
       embed
         .setColor("RED")
-        .setDescription(
-        `An error occurred while fetching the server data.`
-        )
+        .setDescription(`An error occurred while fetching the server data.`)
         .setFooter(`Status: ${res.statusCode}`);
-      
+
       return void message.channel.send(embed);
     }
 
     const response = res.json();
 
     if (response.data?.online) {
-      embed
-        .setColor("GREEN")
-        .addField("Server Online", "Yes", true);
+      embed.setColor("GREEN").addField("Server Online", "Yes", true);
     } else {
-      embed
-        .setColor("RED")
-        .addField("Server Online", "No", true);
+      embed.setColor("RED").addField("Server Online", "No", true);
 
       return void message.util.send(embed);
     }
 
     embed
       .addField(
-      "Player Count",
-      `${response.data.players.online} / ${response.data.players.max}`,
-       false
-       )  
+        "Player Count",
+        `${response.data.players.online} / ${response.data.players.max}`,
+        false
+      )
       .addField("Version", response.data.version.name, false)
       .setThumbnail(response.data.favicon);
 

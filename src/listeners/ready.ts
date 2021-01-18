@@ -20,7 +20,8 @@ export default class Ready extends Listener {
 
   public async exec(): Promise<void> {
     setInterval(() => {
-      const index = Config.statuses[Math.floor(Math.random() * Config.statuses.length)];
+      const index =
+        Config.statuses[Math.floor(Math.random() * Config.statuses.length)];
       this.client.user.setActivity(index, { type: "PLAYING" });
     }, 15000);
 

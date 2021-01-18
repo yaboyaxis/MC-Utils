@@ -6,7 +6,6 @@ import config from "../config";
 import MemberModel from "../models/MemberModel";
 import Logger from "../structures/Logger";
 import Mongo from "../structures/Mongo";
-import Hastebin from "hastebin.js";
 
 let owners = config.bot.owners;
 let prefix = config.bot.prefix;
@@ -16,7 +15,6 @@ declare module "discord-akairo" {
     commandHandler: CommandHandler;
     listenerHandler: ListenerHandler;
     inhibitorHandler: InhibitorHandler;
-    pasteBin: Hastebin;
     botConfig: typeof config;
     databaseCache_mutedUsers: Collection<string, DocumentType<MemberModel>>;
     databaseCache: any;
@@ -36,7 +34,6 @@ export default class BotClient extends AkairoClient {
     string,
     DocumentType<MemberModel>
   >();
-  public pasteBin: Hastebin = new Hastebin();
   public inhibitorHandler: InhibitorHandler = new InhibitorHandler(this, {
     directory: join(__dirname, "..", "inhibitors"),
   });
@@ -96,8 +93,8 @@ export default class BotClient extends AkairoClient {
     this.listenerHandler.loadAll();
     this.inhibitorHandler.loadAll();
     await Mongo()
-      .catch((e) => Logger.error("DB", e))
-      .then(() => Logger.success("DB", "Connected to MongoDB!"));
+      .then(() => Logger.success("DB", "Connected to MongoDB!"))
+      .catch((e) => Logger.error("DB", e));
   }
   public async start(): Promise<string> {
     Logger.event("Starting the bot... please wait.");

@@ -22,7 +22,7 @@ export default class BotInfo extends Command {
       new MessageEmbed()
         .setTitle(`${this.client.user.username}'s Info`)
         .setDescription(
-          `<@!${this.client.user.id}> is a multipurpose bot written by **Axis#9999 and Menin#4642**.`
+          `<@!${this.client.user.id}> is a multipurpose bot written by **Axis#9999**.`
         )
         .setThumbnail(this.client.user.displayAvatarURL())
         .addField("Bot Version", `\`${version}\``, true)

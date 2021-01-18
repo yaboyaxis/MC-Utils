@@ -1,7 +1,7 @@
 dependencies:
+  '@helperdiscord/centra': 1.1.0
   '@picklerickdev/discord-webhooks': 1.1.1
   '@typegoose/typegoose': 7.4.7_566a8f41cf8f39c92f97b18d7c09f470
-  axios: 0.21.1
   bufferutil: 4.0.3
   chalk: 4.1.0
   common-tags: 1.8.0
@@ -9,7 +9,6 @@ dependencies:
   discord-akairo: 8.1.0
   discord.js: 12.5.1_bufferutil@4.0.3
   erlpack: github.com/discord/erlpack/e27db8f82892bdb9b28a0547cc394d68b5d2242d
-  hastebin.js: 1.3.2
   mathjs: 8.1.1
   moment: 2.29.1
   mongoose: 5.10.8
@@ -44,6 +43,12 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-ZfFsbgEXW71Rw/6EtBdrP5VxBJy4dthyC0tpQKGKmYFImlmmrykO14Za+BiIVduwjte0jXEBlhSKf0MWbFp9Eg==
+  /@helperdiscord/centra/1.1.0:
+    dependencies:
+      undici: 3.2.0
+    dev: false
+    resolution:
+      integrity: sha512-FCtpJMlAzEH6AdN5CvHzOdKWUDAiSSbCC94xTqX+eVL//+Nv5TMpGB3bNZxS29zFz0CofTGEaepn5V7WEjn5Sw==
   /@picklerickdev/discord-webhooks/1.1.1:
     dev: false
     resolution:
@@ -214,12 +219,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
-  /axios/0.21.1:
-    dependencies:
-      follow-redirects: 1.13.1
-    dev: false
-    resolution:
-      integrity: sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
   /balanced-match/1.0.0:
     resolution:
       integrity: sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
@@ -614,17 +613,6 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==
-  /follow-redirects/1.13.1:
-    dev: false
-    engines:
-      node: '>=4.0'
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    resolution:
-      integrity: sha512-SSG5xmZh1mkPGyKzjZP8zLjltIfpW32Y5QpdNJyjcfGxK3qo3NDDkZOZSFiGn1A6SclQxY9GzEwAHQ3dmYRWpg==
   /forever-agent/0.6.1:
     dev: false
     resolution:
@@ -784,12 +772,6 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-UqBRqi4ju7T+TqGNdqAO0PaSVGsDGJUBQvk9eUWNGRY1CFGDzYhLWoM7JQEemnlvVcv/YEmc2wNW8BC24EnUsw==
-  /hastebin.js/1.3.2:
-    dependencies:
-      node-fetch: 2.6.1
-    dev: false
-    resolution:
-      integrity: sha512-7HQll+60xLaNVve3vE3HRSY7EuplT6/8uW1l8esl4stXks0Tid/xM2he7LZNU1xwZE2IuvlPS6lB6y0u3WuC7A==
   /http-cache-semantics/4.1.0:
     dev: true
     resolution:
@@ -1813,6 +1795,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-nrXZwwXrD/T/JXeygJqdCO6NZZ1L66HrxM/Z7mIq2oPanoN0F1nLx3lwJMu6AwJY69hdixaFQOuoYsMjE5/C2A==
+  /undici/3.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-lBvV7jZirNtDbDmnDJTLbfFDJO6VDav76XRqILfeERlSnAWeYn5pAo6JdPc7OM55RiBZdsh8ucRG9TNfDrDnhg==
   /uniqid/5.2.0:
     dev: false
     resolution:
@@ -1960,6 +1946,7 @@ packages:
       tarball: https://codeload.github.com/discord/erlpack/tar.gz/e27db8f82892bdb9b28a0547cc394d68b5d2242d
     version: 0.1.3
 specifiers:
+  '@helperdiscord/centra': ^1.1.0
   '@picklerickdev/discord-webhooks': ^1.1.1
   '@typegoose/typegoose': ^7.4.5
   '@types/common-tags': ^1.8.0
@@ -1968,7 +1955,6 @@ specifiers:
   '@types/node': ^14.14.2
   '@types/uniqid': ^5.2.0
   '@types/url-regex-safe': ^1.0.0
-  axios: ^0.21.1
   bufferutil: ^4.0.3
   chalk: ^4.1.0
   common-tags: ^1.8.0
@@ -1976,7 +1962,6 @@ specifiers:
   discord-akairo: ^8.1.0
   discord.js: ^12.5.1
   erlpack: github:discord/erlpack
-  hastebin.js: ^1.3.2
   mathjs: ^8.1.0
   moment: ^2.29.1
   mongoose: '=5.10.8'

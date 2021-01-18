@@ -19,24 +19,8 @@ export default class Ready extends Listener {
   }
 
   public async exec(): Promise<void> {
-    let statusArray = [
-      "Get out of my room, I'm playing Minecraft!",
-      "e",
-      "On soundmc.world",
-      "Breaking bedrock",
-      "Mining bobux",
-      "Speedrunning with Sound",
-      "Eating cake",
-      "Help me luca is keeping me in his basement",
-      "jazzy is cool?",
-      "Piyeris is epic",
-      "deleting dirt blocks",
-      "pvp",
-      "Axis is epic",
-    ];
-
     setInterval(() => {
-      const index = statusArray[Math.floor(Math.random() * statusArray.length)];
+      const index = Config.statuses[Math.floor(Math.random() * Config.statuses.length)];
       this.client.user.setActivity(index, { type: "PLAYING" });
     }, 15000);
 

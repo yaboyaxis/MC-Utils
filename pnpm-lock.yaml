@@ -9,6 +9,7 @@ dependencies:
   discord-akairo: 8.1.0
   discord.js: 12.5.1_bufferutil@4.0.3
   erlpack: github.com/discord/erlpack/e27db8f82892bdb9b28a0547cc394d68b5d2242d
+  hastebin.js: 1.3.2
   mathjs: 8.1.1
   moment: 2.29.1
   mongoose: 5.10.8
@@ -783,6 +784,12 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-UqBRqi4ju7T+TqGNdqAO0PaSVGsDGJUBQvk9eUWNGRY1CFGDzYhLWoM7JQEemnlvVcv/YEmc2wNW8BC24EnUsw==
+  /hastebin.js/1.3.2:
+    dependencies:
+      node-fetch: 2.6.1
+    dev: false
+    resolution:
+      integrity: sha512-7HQll+60xLaNVve3vE3HRSY7EuplT6/8uW1l8esl4stXks0Tid/xM2he7LZNU1xwZE2IuvlPS6lB6y0u3WuC7A==
   /http-cache-semantics/4.1.0:
     dev: true
     resolution:
@@ -1969,6 +1976,7 @@ specifiers:
   discord-akairo: ^8.1.0
   discord.js: ^12.5.1
   erlpack: github:discord/erlpack
+  hastebin.js: ^1.3.2
   mathjs: ^8.1.0
   moment: ^2.29.1
   mongoose: '=5.10.8'

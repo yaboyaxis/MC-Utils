@@ -54,11 +54,22 @@ export default class Eval extends Command {
     }
     const stopTime = Date.now();
 
-    let output;
+    let output: string;
 
     if (result instanceof Error || result instanceof Promise)
       output = String(result);
     else output = util.inspect(result);
+
+    if (output.length > 1024) {
+      await this.client.pasteBin.post(output.replace(evalRegex, "REDACTED")).then((link: string) => {
+        return message.util.send(
+          new MessageEmbed()
+            .setTitle(`Time Taken: **${stopTime - startTime}** milliseconds`)
+            .setDescription(`Output: **${link}**`)
+            .setColor(result instanceof Error ? 0xff0000 : 0xff00)
+        );
+      })
+    }
 
     return message.util.send(
       new MessageEmbed()

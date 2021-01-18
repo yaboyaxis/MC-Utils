@@ -69,7 +69,6 @@ export default class Eval extends Command {
             .setDescription(`Output: **${link}**`)
             .setColor(result instanceof Error ? 0xff0000 : 0xff00)
         );
-      
     }
 
     return message.util.send(

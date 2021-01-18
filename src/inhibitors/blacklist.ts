@@ -16,22 +16,15 @@ export default class BlacklistInhibitor extends Inhibitor {
       guildId: message.guild.id,
       userId: message.author.id,
     });
-    const embed = new MessageEmbed().setDescription(
-      `<@!${message.author.id}>, you've been blacklisted from using the bot.`
-    );
-    const msg = await message.channel.send(embed);
-    msg.delete({ timeout: 10000 });
-    // if (
-    //     userModel.blacklisted === null ||
-    //     userModel.blacklisted === undefined
-    // ) {
-    //     return false;
-    // } else if (
-    //     userModel.blacklisted === true) {
-    //     return true;
-    // } else {
-    //     return false;
-    // }
-    return false;
+    if (userModel.blacklisted !== null && userModel.blacklisted) {
+      const embed = new MessageEmbed().setDescription(
+        `<@!${message.author.id}>, you've been blacklisted from using the bot.`
+      );
+      const msg = await message.channel.send(embed);
+      msg.delete({ timeout: 10000 });
+      return true;
+    } else {
+      return false;
+    }
   }
 }

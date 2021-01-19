@@ -12,8 +12,6 @@ import Logger from "./Logger";
 interface AutoModOptions {
   muteEnabled: boolean;
   warnEnabled: boolean;
-  warnThreshold: number;
-  muteThreshold: number;
   maxInt: number;
   maxDupInt: number;
   maxDuplicatesWarn: number;
@@ -22,7 +20,6 @@ interface AutoModOptions {
   ignoredRoles: string[];
   ignoredChannels: string[];
   ignoredPermissions: string[];
-  removeMsgs: boolean;
   messageLengthLimit: number;
   mentionLimit: number;
   nWordFilter: boolean;
@@ -40,8 +37,6 @@ export class Automod {
     this.options = {
       warnEnabled: options.warnEnabled ?? true,
       muteEnabled: options.muteEnabled ?? true,
-      warnThreshold: options.warnThreshold ?? 3,
-      muteThreshold: options.muteThreshold ?? 4,
       maxDuplicatesWarn: options.maxDuplicatesWarn ?? 7,
       maxDuplicatesMute: options.maxDuplicatesMute ?? 9,
       maxInt: options.maxInt ?? 2000,
@@ -50,7 +45,6 @@ export class Automod {
       ignoredRoles: options.ignoredRoles ?? [],
       ignoredChannels: options.ignoredChannels ?? [],
       ignoredPermissions: options.ignoredPermissions ?? [],
-      removeMsgs: options.removeMsgs ?? true,
       messageLengthLimit: options.messageLengthLimit ?? 500,
       mentionLimit: options.mentionLimit ?? 5,
       nWordFilter: options.nWordFilter ?? true,
@@ -77,13 +71,18 @@ export class Automod {
     member: GuildMember,
     spamMessages: any[]
   ) {
-    await autoModWarn(
-      member,
-      member.guild,
-      "Violating Automod",
-      message,
-      client
-    );
+    try {
+      await autoModWarn(
+        message.member,
+        message.guild,
+        "Sending Links",
+        message,
+        client
+      );
+      await dispatchAutoModMsg("Sending Links", message, "Warn");
+    } catch (e) {
+      Logger.error("Automod", e.message);
+    }
   }
 
   async processMsg(client: AkairoClient, message: Message) {
@@ -140,18 +139,14 @@ export class Automod {
         m.sentTimestamp > currentMessage.sentTimestamp - this.options.maxDupInt
     );
 
-    if (message.content.match(urlRegexSafe({ strict: true }))) {
+    if (
+      this.options.filterURLs &&
+      message.content.match(urlRegexSafe({ strict: true }))
+    ) {
       if (message.deletable)
         await message.delete({ reason: "[AutoMod] Triggered link filter" });
       try {
-        await autoModWarn(
-          message.member,
-          message.guild,
-          "Sending Links",
-          message,
-          client
-        );
-        await dispatchAutoModMsg("Sending Links", message, "Warn");
+        await this.warnUser(client, message, member, []);
       } catch (e) {
         Logger.error("Automod", e.message);
       }

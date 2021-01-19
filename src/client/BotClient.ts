@@ -41,7 +41,7 @@ export default class BotClient extends AkairoClient {
     string,
     DocumentType<MemberModel>
   >();
-  public automod: Automod = new Automod({
+  public automod: Automod = new Automod(this, {
     muteEnabled: true,
     warnEnabled: true,
     maxInt: 2000,

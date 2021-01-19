@@ -33,7 +33,7 @@ export class Automod {
   cache: { messages: any[]; warnedUsers: any[]; mutedUsers: any[] };
   options: AutoModOptions;
 
-  constructor(options: AutoModOptions) {
+  constructor(public readonly client: AkairoClient, options: AutoModOptions) {
     this.options = {
       warnEnabled: options.warnEnabled ?? true,
       muteEnabled: options.muteEnabled ?? true,
@@ -66,7 +66,6 @@ export class Automod {
   async muteUser(message: Message, member: GuildMember, spamMessages: any[]) {}
 
   async warnUser(
-    client: AkairoClient,
     message: Message,
     member: GuildMember,
     spamMessages: any[]
@@ -77,7 +76,7 @@ export class Automod {
         message.guild,
         "Sending Links",
         message,
-        client
+        this.client
       );
       await dispatchAutoModMsg("Sending Links", message, "Warn");
     } catch (e) {
@@ -85,7 +84,7 @@ export class Automod {
     }
   }
 
-  async processMsg(client: AkairoClient, message: Message) {
+  async processMsg(message: Message) {
     if (
       !message.guild ||
       message.author.id === message.client.user.id ||
@@ -146,7 +145,7 @@ export class Automod {
       if (message.deletable)
         await message.delete({ reason: "[AutoMod] Triggered link filter" });
       try {
-        await this.warnUser(client, message, member, []);
+        await this.warnUser(message, member, []);
       } catch (e) {
         Logger.error("Automod", e.message);
       }

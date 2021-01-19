@@ -65,11 +65,7 @@ export class Automod {
 
   async muteUser(message: Message, member: GuildMember, spamMessages: any[]) {}
 
-  async warnUser(
-    message: Message,
-    member: GuildMember,
-    spamMessages: any[]
-  ) {
+  async warnUser(message: Message, member: GuildMember, spamMessages: any[]) {
     try {
       await autoModWarn(
         message.member,

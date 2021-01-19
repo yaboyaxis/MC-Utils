@@ -10,6 +10,7 @@ export default class Automod extends Command {
       aliases: ["automod", "automod_settings"],
       channel: "guild",
       category: "Utilities",
+      userPermissions: ["MANAGE_GUILD"],
       ratelimit: 3,
       description: {
         content: "Shows information about the bot.",

@@ -9,6 +9,7 @@ import { Message, Collection } from "discord.js";
 import { join } from "path";
 import config from "../config";
 import MemberModel from "../models/MemberModel";
+import { Automod } from "../structures/Automod";
 import Logger from "../structures/Logger";
 import Mongo from "../structures/Mongo";
 
@@ -21,6 +22,7 @@ declare module "discord-akairo" {
     listenerHandler: ListenerHandler;
     inhibitorHandler: InhibitorHandler;
     botConfig: typeof config;
+    automod: Automod;
     databaseCache_mutedUsers: Collection<string, DocumentType<MemberModel>>;
     databaseCache: any;
   }
@@ -39,6 +41,25 @@ export default class BotClient extends AkairoClient {
     string,
     DocumentType<MemberModel>
   >();
+  public automod: Automod = new Automod({
+    muteEnabled: true,
+    warnEnabled: true,
+    maxInt: 2000,
+    maxDupInt: 2000,
+    maxDuplicatesWarn: 7,
+    maxDuplicatesMute: 9,
+    ignoredMembers: [],
+    ignoredChannels: [],
+    ignoredPermissions: [],
+    ignoredRoles: [],
+    ignoreBots: true,
+    messageLengthLimit: 500,
+    mentionLimit: 4,
+    nWordFilter: true,
+    soundPingFilter: true,
+    messageSpamCount: 5,
+    filterURLs: true,
+  });
   public inhibitorHandler: InhibitorHandler = new InhibitorHandler(this, {
     directory: join(__dirname, "..", "inhibitors"),
   });

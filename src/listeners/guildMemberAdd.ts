@@ -20,17 +20,21 @@ export default class guildBanAdd extends Listener {
       userId: member.id,
     });
     if (currentModel !== null ?? currentModel !== undefined) return;
-    await memberModel.create({
-      guildId: member.guild.id,
-      userId: member.id,
-      blacklisted: false,
-      sanctions: [],
-      mute: {
-        muted: false,
-        endDate: null,
-        case: null,
-        isPerm: null,
-      },
-    });
+    try {
+      await memberModel.create({
+        guildId: member.guild.id,
+        userId: member.id,
+        blacklisted: false,
+        sanctions: [],
+        mute: {
+          muted: false,
+          endDate: null,
+          case: null,
+          isPerm: null,
+        },
+      });
+    } catch (e) {
+      return void {};
+    }
   }
 }

@@ -17,12 +17,12 @@ export default class BotInfo extends Command {
     });
   }
 
-  public exec(message: Message): Promise<Message> {
+  public async exec(message: Message): Promise<Message> {
     return message.util.send(
       new MessageEmbed()
         .setTitle(`${this.client.user.username}'s Info`)
         .setDescription(
-          `<@!${this.client.user.id}> is a multipurpose bot written by **Axis#9999 and Menin#4642**.`
+          `<@!${this.client.user.id}> is a multipurpose bot written by **Axis#9999** and **Vetlix#0921**.`
         )
         .setThumbnail(this.client.user.displayAvatarURL())
         .addField("Bot Version", `\`${version}\``, true)

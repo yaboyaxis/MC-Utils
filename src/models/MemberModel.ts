@@ -26,8 +26,10 @@ export default class MemberModel {
   userId!: string;
   @prop()
   guildId!: string;
+  @prop({ default: false })
+  blacklisted!: boolean;
   @prop({ default: [] })
   sanctions!: Array<CaseInfo>;
-  @prop({ default: { muted: false, endDate: null, case: null } })
+  @prop({ default: { muted: false, isPerm: null, endDate: null, case: null } })
   mute!: Mutes;
 }

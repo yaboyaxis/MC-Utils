@@ -2,6 +2,7 @@ import { Command } from "discord-akairo";
 import { Message, MessageEmbed } from "discord.js";
 import util from "util";
 import config from "../../config";
+import { bin } from "../../structures/Utils";
 
 export default class Eval extends Command {
   public constructor() {
@@ -54,11 +55,21 @@ export default class Eval extends Command {
     }
     const stopTime = Date.now();
 
-    let output;
+    let output: string;
 
     if (result instanceof Error || result instanceof Promise)
       output = String(result);
     else output = util.inspect(result);
+
+    if (output.length > 1024) {
+      const link = await bin(output.replace(evalRegex, "REDACTED"));
+      return message.util.send(
+        new MessageEmbed()
+          .setTitle(`Time Taken: **${stopTime - startTime}** milliseconds`)
+          .setDescription(`Output: **${link}**`)
+          .setColor(result instanceof Error ? 0xff0000 : 0xff00)
+      );
+    }
 
     return message.util.send(
       new MessageEmbed()

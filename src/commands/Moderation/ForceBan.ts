@@ -84,73 +84,67 @@ export default class ForceBan extends Command {
       embed.setDescription("Couldn't send them a ban message! Continuing...");
     }
 
-    message.guild.members
-      .ban(user, { reason: reason })
-      .catch((e) => {
-        embed.setColor(0xff0000);
-        embed.setDescription(`An error occurred whilst banning: \`${e}\``);
-        return message.util.send(embed);
-      })
-      .then(async () => {
-        let dateString: string = utc().format("MMMM Do YYYY, h:mm:ss a");
-        let userId = user.id;
-        let guildID = message.guild.id;
+    try {
+      await message.guild.members.ban(user, { reason: reason });
+    } catch (e) {
+      embed.setColor(0xff0000);
+      embed.setDescription(
+        `An error occurred whilst banning: **${e.message}**`
+      );
+      return message.util.send(embed);
+    }
 
-        let caseNum = uniqid();
-        const caseInfo: CaseInfo = {
-          caseID: caseNum,
-          moderator: message.author.tag,
-          moderatorId: message.author.id,
-          user: `${user.tag} (${user.id})`,
-          date: dateString,
-          type: "Force Ban",
-          reason,
-        };
+    let dateString: string = utc().format("MMMM Do YYYY, h:mm:ss a");
+    let userId = user.id;
+    let guildID = message.guild.id;
 
-        const sanctionsModel = getModelForClass(memberModel);
-        try {
-          await sanctionsModel
-            .findOneAndUpdate(
-              {
-                guildId: guildID,
-                userId: userId,
-              },
-              {
-                guildId: guildID,
-                userId: userId,
-                $push: {
-                  sanctions: caseInfo,
-                },
-              },
-              {
-                upsert: true,
-              }
-            )
-            .catch((e) => {
-              embed.setColor(0xff0000);
-              embed.setDescription(`Error Logging Kick to DB: ${e}`);
-              return message.util.send(embed);
-            });
-        } catch (e) {
-          Logger.error("DB", e);
+    let caseNum = uniqid();
+    const caseInfo: CaseInfo = {
+      caseID: caseNum,
+      moderator: message.author.tag,
+      moderatorId: message.author.id,
+      user: `${user.tag} (${user.id})`,
+      date: dateString,
+      type: "Force Ban",
+      reason,
+    };
+
+    const sanctionsModel = getModelForClass(memberModel);
+    try {
+      await sanctionsModel.findOneAndUpdate(
+        {
+          guildId: guildID,
+          userId: userId,
+        },
+        {
+          guildId: guildID,
+          userId: userId,
+          $push: {
+            sanctions: caseInfo,
+          },
+        },
+        {
+          upsert: true,
         }
+      );
+    } catch (e) {
+      embed.setColor(0xff0000);
+      embed.setDescription(`Error logging force ban to DB: **${e.message}**`);
+      return message.util.send(embed);
+    }
 
-        embed.setDescription(`Banned **${user.tag}** | \`${caseNum}\``);
-        message.channel.send(embed);
+    embed.setDescription(`Banned **${user.tag}** | \`${caseNum}\``);
+    message.channel.send(embed);
 
-        const logEmbed = new MessageEmbed()
-          .setTitle(`Member Force Banned | Case \`${caseNum}\` | ${user.tag}`)
-          .addField(`User:`, `<@${user.id}>`, true)
-          .addField(`Moderator:`, `<@${message.author.id}>`, true)
-          .addField(`Reason:`, reason, true)
-          .setFooter(`ID: ${user.id} | ${dateString}`)
-          .setColor("RED");
+    const logEmbed = new MessageEmbed()
+      .setTitle(`Member Force Banned | Case \`${caseNum}\` | ${user.tag}`)
+      .addField(`User:`, `<@${user.id}>`, true)
+      .addField(`Moderator:`, `<@${message.author.id}>`, true)
+      .addField(`Reason:`, reason, true)
+      .setFooter(`ID: ${user.id} | ${dateString}`)
+      .setColor("RED");
 
-        let modlogChannel = findChannel(
-          this.client,
-          config.channels.modLogChannel
-        );
-        modLog(modlogChannel, logEmbed, message.guild.iconURL());
-      });
+    let modlogChannel = findChannel(this.client, config.channels.modLogChannel);
+    modLog(modlogChannel, logEmbed, message.guild.iconURL());
   }
 }

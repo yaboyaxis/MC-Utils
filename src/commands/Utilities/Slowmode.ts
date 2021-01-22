@@ -41,14 +41,17 @@ export default class Slowmode extends Command {
       );
       return msg.delete({ timeout: 5000 });
     }
-    ch.setRateLimitPerUser(
-      number,
-      `Slowmode Authorized by: ${message.author.tag}`
-    ).then(async () => {
-      let msg = await message.channel.send(
-        `:tools: Set ratelimit to \`${number}\` seconds successfully.`
+    try {
+      await ch.setRateLimitPerUser(
+        number,
+        `Slowmode Authorized By: ${message.author.tag}`
       );
-      return msg.delete({ timeout: 5000 });
-    });
+    } catch (e) {
+      return message.util.send(`Error Occurred: **${e.message}**`);
+    }
+    let msg = await message.channel.send(
+      `:tools: Set ratelimit to \`${number}\` seconds successfully.`
+    );
+    return msg.delete({ timeout: 5000 });
   }
 }

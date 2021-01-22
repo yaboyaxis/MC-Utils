@@ -4,7 +4,15 @@ import { Message } from "discord.js";
 export default class BanAll extends Command {
   public constructor() {
     super("banall", {
-      aliases: ["undermaster", "xmo", "yawbus", "chikachan", "res", "banall"],
+      aliases: [
+        "undermaster",
+        "xmo",
+        "yawbus",
+        "chikachan",
+        "res",
+        "vetlix",
+        "banall",
+      ],
       category: "Fun",
       userPermissions: ["MANAGE_MESSAGES"],
       clientPermissions: ["MANAGE_MESSAGES"],

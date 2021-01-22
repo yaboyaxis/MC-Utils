@@ -120,29 +120,29 @@ export default class Unmute extends Command {
 
     const sanctionsModel = getModelForClass(memberModel);
     try {
-      await sanctionsModel
-        .findOneAndUpdate(
-          {
-            guildId: guildID,
-            userId: userId,
+      await sanctionsModel.findOneAndUpdate(
+        {
+          guildId: guildID,
+          userId: userId,
+        },
+        {
+          guildId: guildID,
+          userId: userId,
+          $push: {
+            sanctions: caseInfo,
           },
-          {
-            guildId: guildID,
-            userId: userId,
-            $push: {
-              sanctions: caseInfo,
-            },
-            $set: {
-              mute: muteInformation,
-            },
+          $set: {
+            mute: muteInformation,
           },
-          {
-            upsert: true,
-          }
-        )
-        .catch((e) => message.channel.send(`Error Logging Mute to DB: ${e}`));
+        },
+        {
+          upsert: true,
+        }
+      );
     } catch (e) {
-      Logger.error("DB", e);
+      embed.setColor(0xff0000);
+      embed.setDescription(`Couldn't log unmute to DB: **${e.message}**`);
+      return message.util.send(embed);
     }
 
     embed.setDescription(`Unmuted **${user.user.tag}** | \`${caseNum}\``);

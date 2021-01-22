@@ -1,5 +1,10 @@
 import { DocumentType } from "@typegoose/typegoose";
-import { AkairoClient, CommandHandler, ListenerHandler } from "discord-akairo";
+import {
+  AkairoClient,
+  CommandHandler,
+  ListenerHandler,
+  InhibitorHandler,
+} from "discord-akairo";
 import { Message, Collection } from "discord.js";
 import { join } from "path";
 import config from "../config";
@@ -14,6 +19,7 @@ declare module "discord-akairo" {
   interface AkairoClient {
     commandHandler: CommandHandler;
     listenerHandler: ListenerHandler;
+    inhibitorHandler: InhibitorHandler;
     botConfig: typeof config;
     databaseCache_mutedUsers: Collection<string, DocumentType<MemberModel>>;
     databaseCache: any;
@@ -33,6 +39,9 @@ export default class BotClient extends AkairoClient {
     string,
     DocumentType<MemberModel>
   >();
+  public inhibitorHandler: InhibitorHandler = new InhibitorHandler(this, {
+    directory: join(__dirname, "..", "inhibitors"),
+  });
   public listenerHandler: ListenerHandler = new ListenerHandler(this, {
     directory: join(__dirname, "..", "listeners"),
   });
@@ -79,15 +88,18 @@ export default class BotClient extends AkairoClient {
   }
   private async _init(): Promise<void> {
     this.commandHandler.useListenerHandler(this.listenerHandler);
+    this.commandHandler.useInhibitorHandler(this.inhibitorHandler);
     this.listenerHandler.setEmitters({
       commandHandler: this.commandHandler,
       listenerHandler: this.listenerHandler,
+      inhibitorHandler: this.inhibitorHandler,
     });
     this.commandHandler.loadAll();
     this.listenerHandler.loadAll();
+    this.inhibitorHandler.loadAll();
     await Mongo()
-      .catch((e) => Logger.error("DB", e))
-      .then(() => Logger.success("DB", "Connected to MongoDB!"));
+      .then(() => Logger.success("DB", "Connected to MongoDB!"))
+      .catch((e) => Logger.error("DB", e));
   }
   public async start(): Promise<string> {
     Logger.event("Starting the bot... please wait.");

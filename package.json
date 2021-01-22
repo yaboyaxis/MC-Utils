@@ -29,8 +29,7 @@
     "mquery": "^3.2.3",
     "ms": "^2.1.2",
     "reflect-metadata": "^0.1.13",
-    "uniqid": "^5.2.0",
-    "url-regex-safe": "^1.0.2"
+    "uniqid": "^5.2.0"
   },
   "devDependencies": {
     "@types/common-tags": "^1.8.0",

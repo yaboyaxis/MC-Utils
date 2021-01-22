@@ -42,6 +42,6 @@ export default class Say extends Command {
       );
       return message.util.send(embed);
     }
-    await message.channel.send(string);
+    await message.channel.send(string, { disableMentions: "everyone" });
   }
 }

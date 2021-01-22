@@ -130,6 +130,7 @@ export default class Ban extends Command {
     };
 
     const sanctionsModel = getModelForClass(memberModel);
+
     try {
       await sanctionsModel
         .findOneAndUpdate(

@@ -43,6 +43,5 @@ export default class message extends Listener {
         return await dispatchAfkWelcomeEmbed(message, message.member);
       }
     }
-    await this.client.automod.processMsg(message);
   }
 }

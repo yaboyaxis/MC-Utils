@@ -1,0 +1,21 @@
+{
+  "name": "@mc-utils/bot",
+  "version": "3.0.0",
+  "description": "A bot for the Sound's MC World discord server.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p .; exit 0",
+    "start": "docker-compose up --build -d bot",
+    "pretty": "npx prettier --write \"./src/**/*.ts\"",
+    "pretty-check": "npx prettier --check \"./src/**/*.ts\""
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "@sapphire/framework": "^1.0.0-alpha.3",
+    "discord.js": "^12.5.1"
+  }
+}

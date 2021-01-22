@@ -30,19 +30,6 @@ export default class Ready extends Listener {
     const muteModel = getModelForClass(MemberModel);
 
     setInterval(async () => {
-      try {
-        this.client.guilds.cache.get("719977718858514483").members.cache.forEach(async (user) => {
-          await muteModel.findOneAndUpdate({
-            userId: user.id,
-            guildId: user.guild.id
-          }, {
-            $set: { blacklisted: false }
-          }, { upsert: true })
-        });
-        await console.log("Done");
-      } catch (e) {
-        console.log(e.message);
-      }
       await muteModel
         .find({ "mute.muted": true, "mute.isPerm": false })
         .then((members) => {

@@ -10,4 +10,10 @@ export default class Client extends SapphireClient {
   constructor(options?: SapphireClientOptions & ClientOptions) {
     super(options);
   }
+
+  public async login(token: string) {
+    await this.db.init();
+    
+    return super.login(token);
+  }
 }

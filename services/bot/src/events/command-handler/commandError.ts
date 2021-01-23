@@ -14,7 +14,7 @@ export default class CommandErrorEvent extends Event<Events.CommandError> {
   }
 
   public run(error: any, { message, piece }: CommandErrorPayload) {
-    if (!error.message) return message.channel.send(error.message);
+    if (!error.message) return message.channel.send(error);
     if (error instanceof UserError) return message.channel.send(error.message);
   }
 }

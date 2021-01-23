@@ -1,20 +1,20 @@
 {
   "compilerOptions": {
-      "module": "commonjs",
-      "target": "es2019",
-      "outDir": "dist",
-      "strict": false,
-      "alwaysStrict": true,
-      "esModuleInterop": true,
-      "experimentalDecorators": true,
-      "emitDecoratorMetadata": true,
-      "resolveJsonModule": true,
-      "downlevelIteration": true
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "target": "ES2020",
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true
   },
   "include": [
-      "src/**/*"
+    "src/**/*.ts",
+    "test/**/*.ts"
   ],
   "exclude": [
-      "node_modules"
+    "node_modules"
   ]
 }

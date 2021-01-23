@@ -8,7 +8,7 @@ WORKDIR /opt/mc-utils/bot
 
 ENV CXXFLAGS="-w"
 
-COPY packages/bot/ ./
+COPY services/bot/ ./
 
 RUN npm i
 RUN npm run build

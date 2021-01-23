@@ -108,4 +108,5 @@ connections.txt
 .idea
 
 # Ignore Config
-src/config.ts
+BotConfig.ts
+docker-compose.yml

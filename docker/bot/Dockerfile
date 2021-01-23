@@ -1,6 +1,9 @@
-FROM node:14.15.4-alpine3.12
+FROM node:14-alpine
 
-RUN apk add git python3 g++ make pkgconf cairo-dev jpeg-dev pango-dev giflib-dev
+ENV PNPM_VERSION=5.15.3
+
+RUN apk add git python3 g++ make curl pkgconf cairo-dev jpeg-dev pango-dev giflib-dev \
+&& curl -L https://unpkg.com/@pnpm/self-installer | node
 
 RUN ln -sf pkgconf /usr/bin/pkg-config
 
@@ -10,8 +13,8 @@ ENV CXXFLAGS="-w"
 
 COPY services/bot/ ./
 
-RUN npm i -g pnpm
 RUN pnpm i
-RUN npm run build
+
+RUN pnpm run build
 
 CMD [ "node", ".", "--max-old-space-size=8192" ]

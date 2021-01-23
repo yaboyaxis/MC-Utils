@@ -28,7 +28,6 @@ export default class EvalCommand extends Command {
       DISCORD_TOKEN,
       POSTGRES_HOST,
       POSTGRES_PASSWORD,
-      POSTGRES_USERNAME,
       POSTGRES_DATABASE,
     ];
 

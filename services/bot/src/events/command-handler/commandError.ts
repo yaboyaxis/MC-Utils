@@ -1,9 +1,15 @@
-import { CommandErrorPayload, Event, Events, PieceContext, UserError } from "@sapphire/framework";
+import {
+  CommandErrorPayload,
+  Event,
+  Events,
+  PieceContext,
+  UserError,
+} from "@sapphire/framework";
 
 export default class CommandErrorEvent extends Event<Events.CommandError> {
   constructor(context: PieceContext) {
     super(context, {
-      name: Events.CommandError
+      name: Events.CommandError,
     });
   }
 

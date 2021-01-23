@@ -1,27 +1,28 @@
-import { Args, Command, PieceContext } from '@sapphire/framework';
-import { Message } from 'discord.js';
+import { Args, Command, PieceContext } from "@sapphire/framework";
+import { Message } from "discord.js";
 import {
   DISCORD_TOKEN,
   POSTGRES_PASSWORD,
   POSTGRES_HOST,
   POSTGRES_USERNAME,
   POSTGRES_DATABASE,
-} from '../../BotConfig';
-import { inspect } from 'util';
-import { MessageEmbed } from 'discord.js';
+} from "../../BotConfig";
+import { inspect } from "util";
+import { MessageEmbed } from "discord.js";
+import Util from "../../util/Util";
 
 export default class EvalCommand extends Command {
   constructor(context: PieceContext) {
     super(context, {
-      name: 'eval',
-      aliases: ['e', 'ev'],
-      preconditions: ['OwnerOnly'],
+      name: "eval",
+      aliases: ["e", "ev"],
+      preconditions: ["OwnerOnly"],
     });
   }
 
   public async run(ctx: Message, args: Args) {
-    const code = await args.restResult('string');
-    if (!code.success) throw 'Missing required arguments: code';
+    const code = await args.restResult("string");
+    if (!code.success) throw "Missing required arguments: code";
 
     const privates = [
       DISCORD_TOKEN,
@@ -35,14 +36,14 @@ export default class EvalCommand extends Command {
 
     const evalRegex = new RegExp(
       `(${privates.reduce(
-        (a, p = '') =>
-          `${a}${a ? '|' : ''}${p.replace(
+        (a, p = "") =>
+          `${a}${a ? "|" : ""}${p.replace(
             symbolRegex,
-            (match, capture) => '\\' + capture
+            (match, capture) => "\\" + capture
           )}`,
-        ''
+        ""
       )})`,
-      'g'
+      "g"
     );
 
     let result;
@@ -62,7 +63,8 @@ export default class EvalCommand extends Command {
     else output = inspect(result);
 
     if (output.length > 1024) {
-      const link = await this.context.client.util.bin(output.replace(evalRegex, 'REDACTED'));
+      const bin = new Util(this.context.client);
+      const link = await bin.bin(output.replace(evalRegex, "REDACTED"));
       return ctx.channel.send(
         new MessageEmbed()
           .setTitle(`Time Taken: **${stopTime - startTime}** milliseconds`)
@@ -73,20 +75,20 @@ export default class EvalCommand extends Command {
 
     return ctx.channel.send(
       new MessageEmbed()
-        .setAuthor('Evaluation', ctx.author.displayAvatarURL({ dynamic: true }))
+        .setAuthor("Evaluation", ctx.author.displayAvatarURL({ dynamic: true }))
         .setTitle(`Time taken: **${stopTime - startTime}** milliseconds`)
         .setColor(result instanceof Error ? 0xff0000 : 0xff00)
-        .addField('Input', `\`\`\`js\n${code.value}\`\`\``)
+        .addField("Input", `\`\`\`js\n${code.value}\`\`\``)
         .addField(
-          result instanceof Error ? 'Error' : 'Output',
-          `\`\`\`js\n${output.replace(evalRegex, 'REDACTED')}\`\`\``
+          result instanceof Error ? "Error" : "Output",
+          `\`\`\`js\n${output.replace(evalRegex, "REDACTED")}\`\`\``
         )
         .setFooter(
-          'Type: ' +
+          "Type: " +
             (result instanceof Array
-              ? 'array'
+              ? "array"
               : result instanceof Error
-              ? 'error'
+              ? "error"
               : typeof result)
         )
     );

@@ -62,8 +62,7 @@ export default class EvalCommand extends Command {
     else output = inspect(result);
 
     if (output.length > 1024) {
-      const bin = new Util(this.context.client);
-      const link = await bin.bin(output.replace(evalRegex, "REDACTED"));
+      const link = await this.context.client.util.bin(output.replace(evalRegex, "REDACTED"));
       return ctx.channel.send(
         new MessageEmbed()
           .setTitle(`Time Taken: **${stopTime - startTime}** milliseconds`)

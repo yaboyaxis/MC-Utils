@@ -13,7 +13,7 @@ export default class Client extends SapphireClient {
 
   public async login(token: string) {
     await this.db.init();
-    
+
     return super.login(token);
   }
 }

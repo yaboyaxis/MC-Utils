@@ -1,8 +1,8 @@
 import req from "@helperdiscord/centra";
-import { SapphireClient } from "@sapphire/framework";
+import Client from "../lib/Client";
 
 export default class Util {
-  constructor(public readonly client: SapphireClient) {}
+  constructor(public readonly client: Client) {}
 
   public async bin(body: any, ext = "js") {
     const res = await req("https://hst.sh/documents")

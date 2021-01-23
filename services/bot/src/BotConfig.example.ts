@@ -4,6 +4,7 @@ import { join } from "path";
 import InfractionEntity from "./lib/database/entities/InfractionEntity";
 
 export const PREFIX = ">>";
+
 export const POSTGRES_USERNAME = "";
 export const POSTGRES_PASSWORD = "";
 export const POSTGRES_DATABASE = "";

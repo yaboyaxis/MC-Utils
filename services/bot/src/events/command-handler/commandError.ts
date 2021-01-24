@@ -5,9 +5,9 @@ import {
   PieceContext,
   UserError,
 } from "@sapphire/framework";
-import { Logger } from '@ayanaware/logger';
+import { Logger } from "@ayanaware/logger";
 
-const log = Logger.get('Commands');
+const log = Logger.get("Commands");
 
 export default class CommandErrorEvent extends Event<Events.CommandError> {
   constructor(context: PieceContext) {

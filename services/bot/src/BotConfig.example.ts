@@ -2,8 +2,11 @@ import { PostgreSqlDriver } from "@mikro-orm/postgresql";
 import { Options, ReflectMetadataProvider } from "@mikro-orm/core";
 import { join } from "path";
 import InfractionEntity from "./lib/database/entities/InfractionEntity";
+import { LogLevel } from "@ayanaware/logger";
 
 export const PREFIX = ">>";
+
+export const LOG_LEVEL = LogLevel.DEBUG;
 
 export const POSTGRES_USERNAME = "";
 export const POSTGRES_PASSWORD = "";

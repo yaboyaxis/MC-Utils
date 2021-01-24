@@ -5,7 +5,7 @@ export default class Util {
   constructor(public readonly client: Client) {}
 
   public async bin(body: any, ext = "js") {
-    const res = await req("https://hst.sh/documents")
+    const res = await req("https://hst.sh/documents", "POST")
       .body(body)
       .timeout(15000)
       .send();

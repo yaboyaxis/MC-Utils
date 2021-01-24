@@ -1,15 +1,12 @@
 import { Args, Command, PieceContext } from "@sapphire/framework";
-import { Message } from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
 import {
   DISCORD_TOKEN,
   POSTGRES_PASSWORD,
   POSTGRES_HOST,
-  POSTGRES_USERNAME,
   POSTGRES_DATABASE,
 } from "../../BotConfig";
 import { inspect } from "util";
-import { MessageEmbed } from "discord.js";
-import Util from "../../util/Util";
 
 export default class EvalCommand extends Command {
   constructor(context: PieceContext) {

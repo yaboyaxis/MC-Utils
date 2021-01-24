@@ -1,10 +1,14 @@
 dependencies:
+  '@ayanaware/logger': 2.2.1
   '@helperdiscord/centra': 1.1.4
   '@mikro-orm/core': 4.3.4_@mikro-orm+postgresql@4.3.4
   '@mikro-orm/postgresql': 4.3.4_@mikro-orm+core@4.3.4
   '@sapphire/framework': 1.0.0-alpha.3_discord.js@12.5.1
+  '@sapphire/pieces': 1.2.0
   '@sapphire/snowflake': 1.2.4
+  colorette: 1.2.1
   discord.js: 12.5.1
+  fecha: 4.2.0
   ioredis: 4.19.4
 devDependencies:
   '@mikro-orm/cli': 4.3.4_@mikro-orm+postgresql@4.3.4
@@ -14,6 +18,12 @@ devDependencies:
   typescript: 4.1.3
 lockfileVersion: 5.2
 packages:
+  /@ayanaware/logger/2.2.1:
+    dependencies:
+      fecha: 4.2.0
+    dev: false
+    resolution:
+      integrity: sha512-POi1s4Fbe4c2XUIV+85zQT9V23+0luu52SIrYiYxXBofirE9omFXhatUOERppZXnY8A9hJoCjl3kvdMkWybGag==
   /@discordjs/collection/0.1.6:
     dev: false
     resolution:
@@ -835,6 +845,10 @@ packages:
       reusify: 1.0.4
     resolution:
       integrity: sha512-NL2Qc5L3iQEsyYzweq7qfgy5OtXCmGzGvhElGEd/SoFWEMOEczNh5s5ocaF01HDetxz+p8ecjNPA6cZxxIHmzA==
+  /fecha/4.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-aN3pcx/DSmtyoovUudctc8+6Hl4T+hI9GBBHLjA76jdZl7+b1sgh5g4k+u/GL3dTy1/pnYzKp69FpJ0OicE3Wg==
   /figlet/1.5.0:
     dev: true
     engines:
@@ -2194,15 +2208,19 @@ packages:
     resolution:
       integrity: sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A==
 specifiers:
+  '@ayanaware/logger': ^2.2.1
   '@helperdiscord/centra': ^1.1.4
   '@mikro-orm/cli': ^4.3.4
   '@mikro-orm/core': ^4.3.4
   '@mikro-orm/postgresql': ^4.3.4
   '@sapphire/framework': ^1.0.0-alpha.3
+  '@sapphire/pieces': ^1.2.0
   '@sapphire/snowflake': ^1.2.4
   '@types/ioredis': ^4.19.2
   '@types/node': ^14.11.2
+  colorette: ^1.2.1
   discord.js: ^12.5.1
+  fecha: ^4.2.0
   ioredis: ^4.19.4
   prettier: ^2.2.1
   typescript: ^4.1.3

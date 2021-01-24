@@ -1,4 +1,7 @@
 import { Event, Events, PieceContext } from "@sapphire/framework";
+import { Logger } from '@ayanaware/logger';
+
+const log = Logger.get('Client');
 
 export default class ErrorEvent extends Event<Events.Error> {
   constructor(context: PieceContext) {
@@ -7,7 +10,7 @@ export default class ErrorEvent extends Event<Events.Error> {
     });
   }
 
-  public run(w) {
-    this.context.client.logger.error(w);
+  public run(error: any) {
+    log.error(error);
   }
 }

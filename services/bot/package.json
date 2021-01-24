@@ -18,12 +18,16 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
+    "@ayanaware/logger": "^2.2.1",
     "@helperdiscord/centra": "^1.1.4",
     "@mikro-orm/core": "^4.3.4",
     "@mikro-orm/postgresql": "^4.3.4",
     "@sapphire/framework": "^1.0.0-alpha.3",
+    "@sapphire/pieces": "^1.2.0",
     "@sapphire/snowflake": "^1.2.4",
+    "colorette": "^1.2.1",
     "discord.js": "^12.5.1",
+    "fecha": "^4.2.0",
     "ioredis": "^4.19.4"
   },
   "mikro-orm": {

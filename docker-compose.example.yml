@@ -1,4 +1,4 @@
-version: '2.4'
+version: "2.4"
 
 services: 
   bot:
@@ -7,6 +7,12 @@ services:
       dockerfile: docker/bot/Dockerfile
     restart: unless-stopped
     tty: true
+    depends_on: 
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+
 
   redis:
     image: eqalpha/keydb

@@ -1,0 +1,40 @@
+{
+  "name": "@mc-utils/bot",
+  "version": "3.0.0",
+  "description": "A bot for the Sound's MC World discord server.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p .; exit 0",
+    "start": "docker-compose up --build -d bot",
+    "lint": "npx prettier --check \"./src/**/*.ts\"",
+    "fix": "npx prettier --write \"./src/**/*.ts\""
+  },
+  "devDependencies": {
+    "@mikro-orm/cli": "^4.3.4",
+    "@types/ioredis": "^4.19.2",
+    "@types/node": "^14.11.2",
+    "prettier": "^2.2.1",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "@ayanaware/logger": "^2.2.1",
+    "@helperdiscord/centra": "^1.1.4",
+    "@mikro-orm/core": "^4.3.4",
+    "@mikro-orm/postgresql": "^4.3.4",
+    "@sapphire/framework": "^1.0.0-alpha.3",
+    "@sapphire/pieces": "^1.2.0",
+    "@sapphire/snowflake": "^1.2.4",
+    "colorette": "^1.2.1",
+    "discord.js": "^12.5.1",
+    "fecha": "^4.2.0",
+    "ioredis": "^4.19.4"
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "configPaths": [
+      "./src/BotConfig.ts",
+      "./dist/BotConfig.js"
+    ]
+  }
+}

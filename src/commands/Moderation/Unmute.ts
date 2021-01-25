@@ -61,6 +61,14 @@ export default class Unmute extends Command {
       embed.setDescription("You cannot unmute a bot!");
       return message.util.send(embed);
     }
+      
+    if (member.roles.highest.position >= message.member.roles.highest.position && message.author.id !== message.guild.ownerID) {
+      embed.setColor(0xff0000);
+      embed.setDescription(
+        `You cannot mute a member with a role superior (or equal) to yours!`
+      );
+      return message.util.send(embed);
+    }
 
     const user = await message.guild.members.fetch(member.id).catch(() => {});
     const actualUser = this.client.users.cache.get(member.id);
@@ -80,7 +88,7 @@ export default class Unmute extends Command {
       return message.util.send(embed);
     }
 
-    if (!member.roles.cache.has(muteRole)) {
+    if (!user.roles.cache.has(muteRole)) {
         embed.setDescription("This user is not muted");
         return message.util.send(embed);
     }

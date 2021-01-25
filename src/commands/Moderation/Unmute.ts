@@ -88,7 +88,7 @@ export default class Unmute extends Command {
       return message.util.send(embed);
     }
 
-    if (!user.roles.cache.has(muteRole)) {
+    if (!user.roles.cache.has(muteRole.id)) {
         embed.setDescription("This user is not muted");
         return message.util.send(embed);
     }

@@ -1,4 +1,4 @@
-import { Args, Command, PieceContext } from "@sapphire/framework";
+import { Args, PieceContext } from "@sapphire/framework";
 import { Message, MessageEmbed } from "discord.js";
 import {
   DISCORD_TOKEN,
@@ -7,6 +7,7 @@ import {
   POSTGRES_DATABASE,
 } from "../../BotConfig";
 import { inspect } from "util";
+import Command from "../../lib/structures/Command";
 
 export default class EvalCommand extends Command {
   constructor(context: PieceContext) {

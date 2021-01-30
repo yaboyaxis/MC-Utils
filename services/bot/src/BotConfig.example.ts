@@ -3,12 +3,13 @@ import { Options, ReflectMetadataProvider } from "@mikro-orm/core";
 import { join } from "path";
 import InfractionEntity from "./lib/database/entities/InfractionEntity";
 import { LogLevel } from "@ayanaware/logger";
+import UserEntity from "./lib/database/entities/UserEntity";
 
 export const PREFIX = ">>";
 
 export const LOG_LEVEL = LogLevel.DEBUG;
 
-export const POSTGRES_USERNAME = "";
+export const POSTGRES_USERNAME = "mc-utils";
 export const POSTGRES_PASSWORD = "";
 export const POSTGRES_DATABASE = "";
 export const POSTGRES_PORT = 5432;
@@ -21,7 +22,7 @@ const MICROORM_DATABASE_OPTIONS: Options<PostgreSqlDriver> = {
   clientUrl: POSTGRES_URL,
   type: "postgresql",
   driver: PostgreSqlDriver,
-  entitiesTs: [InfractionEntity],
+  entitiesTs: [InfractionEntity, UserEntity],
   entities: [join(__dirname, "./lib/database/entities/*.js")],
   metadataProvider: ReflectMetadataProvider,
 };

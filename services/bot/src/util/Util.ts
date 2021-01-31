@@ -15,4 +15,8 @@ export default class Util {
     }
     return `Could not upload data to hst.sh, server returned statusCode ${res.statusCode}.`;
   }
+
+  public toTitleCase(text: string) {
+    return text.replace(/\b\w/g, (c: string) => c.toUpperCase())
+  }
 }

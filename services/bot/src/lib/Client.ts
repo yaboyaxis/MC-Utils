@@ -27,8 +27,6 @@ export default class Client extends SapphireClient {
 
   constructor(options?: SapphireClientOptions & ClientOptions) {
     super(options);
-
-    this.commands.categories = [];
   }
 
   public async login(token: string) {

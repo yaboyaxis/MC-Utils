@@ -88,8 +88,16 @@ export default class Unban extends Command {
       embed.setDescription(`Error logging unban to DB: **${e.message}**`);
       return message.util.send(embed);
     }
+      
     try {
       await message.guild.fetchBan(user);
+    } catch (e) {
+      embed.setColor(0xff0000);
+      embed.setDescription("The ban for the specified user doesn't exist.");
+      return message.util.send(embed);
+    }
+      
+    try {
       await message.guild.members.unban(user.id, reason);
     } catch (e) {
       embed.setColor(0xff0000);

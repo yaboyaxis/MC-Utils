@@ -95,7 +95,7 @@ export default class Ban extends Command {
     const embedToSend = new MessageEmbed()
       .setColor(0x1abc9c)
       .setDescription(
-        `Hello ${member.user.username},\nYou have been banned from **${message.guild.name}** for **${reason}**. If you believe this ban is unjustified, you can appeal [here](https://support.sounddrout.com/)`
+        `Hello ${member.user.username},\nYou have been banned from **${message.guild.name}** for **${reason}**. If you believe this ban is unjustified, you can appeal [here](https://sounddrout.com/mcbanappeals)`
       );
 
     try {

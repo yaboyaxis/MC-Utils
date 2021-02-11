@@ -84,22 +84,19 @@ export default class RuleWarn extends Command {
     const rules = config.rules;
     let reason = "";
     const ruleN = parseInt(ruleNum);
-    if (isNaN(ruleN) || ruleN < 1 || ruleN > rules.length - 1) {
-      try {
-        reason = rules.find((e) => e.toLowerCase().includes(ruleNum));
-      } catch (e) {
-        embed.setDescription(
-          `An error occurred fetching the rule: **${e.message}**`
-        );
-        embed.setColor(0xff0000);
-        return message.util.send(embed);
-      }
+
+    if (ruleN < 1 || ruleN > rules.length - 1 || !rules[ruleN]) {
+      embed.setDescription(
+        `The specified rule doesn't exist.`
+      );
+      embed.setColor(0xff0000);
+      return message.util.send(embed);
     } else {
-      reason = rules[ruleN];
+      reason = rules[ruleN] ?? rules.find(e => e.toLowerCase().includes(ruleNum));
     }
 
     let caseNum = uniqid();
-    let dateString: string = utc().format("MMMM Do YYYY, h:mm:ss a");
+    let dateString = utc().format("MMMM Do YYYY, h:mm:ss a");
     let userId = member.id;
     let guildID = message.guild.id;
 

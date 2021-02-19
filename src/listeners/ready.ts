@@ -125,7 +125,7 @@ export default class Ready extends Listener {
           modLog(modlogChannel, logEmbed, guild.iconURL());
           Logger.event(`Auto Unmuted ${memberData.userId}!`);
         });
-    }, 60000);
+    }, 30000);
     Logger.success("READY", `${this.client.user.tag} is now online!`);
   }
 }
